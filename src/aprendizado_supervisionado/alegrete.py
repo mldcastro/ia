@@ -1,7 +1,8 @@
 import numpy as np
 import numpy.typing as npt
 
-def compute_mse(b, w, data):
+
+def compute_mse(b: float, w: float, data: npt.NDArray[np.floating]) -> float:
     """
     Calcula o erro quadratico medio
     :param b: float - bias (intercepto da reta)
@@ -9,7 +10,12 @@ def compute_mse(b, w, data):
     :param data: np.array - matriz com o conjunto de dados, x na coluna 0 e y na coluna 1
     :return: float - o erro quadratico medio
     """
-    raise NotImplementedError  # substituir pelo seu codigo
+
+    input_ = data[:, 0]
+    observed = data[:, 1]
+
+    predicted = w * input_ + b
+    return np.mean((observed - predicted) ** 2).astype(float)
 
 
 def step_gradient(b, w, data, alpha):
@@ -25,11 +31,11 @@ def step_gradient(b, w, data, alpha):
 
 
 def fit(
-    data: npt.NDArray[np.floating], 
-    b: float, 
-    w: float, 
-    alpha: float, 
-    num_iterations: int
+    data: npt.NDArray[np.floating],
+    b: float,
+    w: float,
+    alpha: float,
+    num_iterations: int,
 ) -> tuple[list[float], list[float]]:
     """
     Para cada época/iteração, executa uma atualização por descida de
