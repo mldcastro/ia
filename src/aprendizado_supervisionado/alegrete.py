@@ -18,7 +18,9 @@ def compute_mse(b: float, w: float, data: npt.NDArray[np.floating]) -> float:
     return np.mean((observed - predicted) ** 2).astype(float)
 
 
-def step_gradient(b, w, data, alpha):
+def step_gradient(
+    b: float, w: float, data: npt.NDArray[np.floating], alpha: float
+) -> tuple[float, float]:
     """
     Executa uma atualização por descida do gradiente  e retorna os valores atualizados de b e w.
     :param b: float - bias (intercepto da reta)
@@ -27,7 +29,18 @@ def step_gradient(b, w, data, alpha):
     :param alpha: float - taxa de aprendizado (a.k.a. tamanho do passo)
     :return: float,float - os novos valores de b e w, respectivamente
     """
-    raise NotImplementedError  # substituir pelo seu codigo
+    input_vector = data[:, 0]
+    input_matrix = np.c_[np.ones_like(input_vector), input_vector]
+
+    observed_vector = data[:, 1]
+    parameters_vector = np.array([b, w])
+
+    gradients = (2 / input_vector.shape[0]) * input_matrix.T.dot(
+        input_matrix.dot(parameters_vector) - observed_vector
+    )
+
+    parameters_vector = parameters_vector - alpha * gradients
+    return parameters_vector[0], parameters_vector[1]
 
 
 def fit(
