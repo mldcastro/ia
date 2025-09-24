@@ -56,7 +56,7 @@ Parâmetros iniciais para o menor Erro Quadrático Médio (EQM):
         - Acurácia no conjunto de treinamento: 85%
         - Acurácia no conjunto de testes: 63%.
         - Duração do treinamento: 4m 24s.
-        - OBS: uma precisão mais alta no conjunto de treinamento que no conjunto de teste, sinal de overfitting.
+        - OBS: uma acurácia muito mais alta no conjunto de treinamento que no conjunto de teste, sinal de overfitting.
 
     - Sexto teste: foi adicionada a função Dropout após as camadas de convolução.
         - Acurácia no conjunto de treinamento: 77%
@@ -69,7 +69,7 @@ Parâmetros iniciais para o menor Erro Quadrático Médio (EQM):
         - Acurácia no conjunto de testes: 1%
         - Duração do treinamento: 2m 2s.
 
-    - Segundo teste: foi adicionada uma camada de convolução com 64 filtros, melhorando bastante a precisão.
+    - Segundo teste: foi adicionada uma camada de convolução com 64 filtros, melhorando bastante a acurácia.
         - Acurácia no conjunto de treinamento: 71%
         - Acurácia no conjunto de testes: 21%
         - Duração do treinamento: 7m 54s.
@@ -134,7 +134,7 @@ Parâmetros iniciais para o menor Erro Quadrático Médio (EQM):
 ### Classificação de complexidade
 
 - MNIST
-    - É o dataset mais fácil, por ter só um canal de cor e também pelas imagens serem dígitos manuscritos, ou seja, não são imagens muito detalhadas. Também é interessante notar que mesmo com uma configuração simples, o modelo alcançou uma precisão alta.
+    - É o dataset mais fácil, por ter só um canal de cor e também pelas imagens serem dígitos manuscritos, ou seja, não são imagens muito detalhadas. Também é interessante notar que mesmo com uma configuração simples, o modelo alcançou uma acurácia alta.
 
 - Fashion-MNIST
     - É mais difícil que o MNIST, as imagens são artigos de moda e algumas são bem parecidas, por exemplo, pullover e coat, ou sneaker e ankle boots. Mas por ter somente um canal de cor, ainda não é tão difícil.
