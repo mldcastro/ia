@@ -137,7 +137,10 @@ Parâmetros iniciais para o menor Erro Quadrático Médio (EQM):
     - É o dataset mais fácil, por ter só um canal de cor e também pelas imagens serem dígitos manuscritos, ou seja, não são imagens muito detalhadas. Também é interessante notar que mesmo com uma configuração simples, o modelo alcançou uma acurácia alta.
 
 - Fashion-MNIST
-    - É mais difícil que o MNIST, as imagens são artigos de moda e algumas são bem parecidas, por exemplo, pullover e coat, ou sneaker e ankle boots. Mas por ter somente um canal de cor, ainda não é tão difícil.
+    - É mais difícil que o MNIST, as imagens são artigos de moda e algumas são bem parecidas, por exemplo, pullover e coat, ou sneaker e ankle boots. Mas por ter somente um canal de cor e os objetos estarem centralizados, ainda não é tão difícil.
 
 - CIFAR-10
-    - Este dataset já é bem mais complicado que os dois primeiros, por serem imagens coloridas, ou seja, com três canais de cores, e também por serem imagens com maior resolução (32x32).
+    - Este dataset já é bem mais complicado que os dois primeiros, por serem imagens coloridas, ou seja, com três canais de cores, com maior resolução (32x32), com fundo mais ruidoso, e os objetos estarem menos centralizados.
+
+- CIFAR-100
+    - O mais difícil dos quatro, imagens coloridas, resolução 32x32, fundo ruidoso, objetos menos centralizados, e acima de tudo, 100 classes com menos amostras por classe que os outros datasets.
