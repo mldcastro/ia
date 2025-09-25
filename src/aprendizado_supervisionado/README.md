@@ -110,6 +110,8 @@ Parâmetros iniciais para o menor Erro Quadrático Médio (EQM):
         - Acurácia no conjunto de testes: 98%
         - Duração 3m 30s.
 
+    - Neste dataset fizemos apenas 4 testes porque o modelo já alcançou uma acurácia boa o suficiente.
+
 - Fashion-MNIST:
     - Primeiro teste: foi utilizada a mesma configuração do modelo do conjunto MNIST.
         - Acurácia no conjunto de treinamento: 90%
@@ -130,6 +132,8 @@ Parâmetros iniciais para o menor Erro Quadrático Médio (EQM):
         - Acurácia no conjunto de treinamento: 95%
         - Acurácia no conjunto de testes: 92%.
         - Duração do treinamento: 4m 44s.
+
+    - Neste dataset fizemos apenas 4 testes porque o modelo já alcançou uma acurácia boa o suficiente.
 
 ### Classificação de complexidade
 
