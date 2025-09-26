@@ -82,9 +82,9 @@ Parâmetros iniciais para o menor Erro Quadrático Médio (EQM):
         - OBS: uma acurácia muito mais alta no conjunto de treinamento que no conjunto de teste, sinal de overfitting.
 
     - Sexto teste: foi adicionada a função Dropout após as camadas de convolução.
-        - Acurácia no conjunto de treinamento: 77%
-        - Acurácia no conjunto de testes: 68%.
-        - Duração do treinamento: 4m 58s.
+        - Acurácia no conjunto de treinamento: 79.77%
+        - Acurácia no conjunto de testes: 65.01%.
+        - Duração do treinamento: Aproximadamente 3 minutos.
 
 - CIFAR-100:
     - Primeiro teste: foi utilizada a configuração dada no trabalho para o conjunto cifar-10.
@@ -108,9 +108,9 @@ Parâmetros iniciais para o menor Erro Quadrático Médio (EQM):
         - Duração do treinamento: 10m 9s.
 
     - Quinto teste: foi adicionado normalização do batch entre as camadas de convolução.
-        - Acurácia no conjunto de treinamento: 44%
-        - Acurácia no conjunto de testes: 31%
-        - Duração do treinamento: 12m 19s.
+        - Acurácia no conjunto de treinamento: 42.46%
+        - Acurácia no conjunto de testes: 28.47%
+        - Duração do treinamento: Aproximadamente 5 minutos.
 
 - MNIST:
     - Primeiro teste: foi utilizado o modelo dado na aula de laboratório.
@@ -129,9 +129,9 @@ Parâmetros iniciais para o menor Erro Quadrático Médio (EQM):
         - Duração do treinamento: 3m 24s.
 
     - Quarto teste: pesquisei sobre a função Dropout que ajuda com o problema de overfitting e apliquei no modelo, mas não ocorreram mudanças no resultado
-        - Acurácia no conjunto de treinamento: 99%
-        - Acurácia no conjunto de testes: 98%
-        - Duração 3m 30s.
+        - Acurácia no conjunto de treinamento: 99.32%
+        - Acurácia no conjunto de testes: 98.82%
+        - Duração do treinamento: Aproximadamente 2 minutos.
 
     - Neste dataset fizemos apenas 4 testes porque o modelo já alcançou uma acurácia boa o suficiente.
 
@@ -152,9 +152,9 @@ Parâmetros iniciais para o menor Erro Quadrático Médio (EQM):
         - Duração do treinamento: 4m 27s.
 
     - Quarto teste: foi adicionado um Dropout no final das camadas de convolução.
-        - Acurácia no conjunto de treinamento: 95%
-        - Acurácia no conjunto de testes: 92%.
-        - Duração do treinamento: 4m 44s.
+        - Acurácia no conjunto de treinamento: 96.12%
+        - Acurácia no conjunto de testes: 91.15%.
+        - Duração do treinamento: Aproximadamente 3 minutos.
 
     - Neste dataset fizemos apenas 4 testes porque o modelo já alcançou uma acurácia boa o suficiente.
 
