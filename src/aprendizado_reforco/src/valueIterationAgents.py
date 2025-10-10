@@ -108,8 +108,25 @@ class ValueIterationAgent(ValueEstimationAgent):
         there are no legal actions, which is the case at the
         terminal state, you should return None.
         """
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+
+        actions = self.mdp.getPossibleActions(state)
+        bestAction = None
+
+        for action in actions:
+            nextStatesAndProbs = self.mdp.getTransitionStatesAndProbs(state, action)
+
+            rewards = [
+                self.mdp.getReward(state, action, nextState)
+                for (nextState, _) in nextStatesAndProbs
+                if not self.mdp.isTerminal(nextState)
+            ]
+
+            if len(rewards) == 0:
+                continue
+
+            bestAction = max(rewards)
+
+        return bestAction
 
     def getPolicy(self, state):
         return self.computeActionFromValues(state)
