@@ -21,7 +21,11 @@
 
 def question2():
     answerDiscount = 0.9
-    answerNoise = 0.2
+
+    # Zerar a probabilidade do agente se mover na direção errada faz com que
+    # seja possível realizar a travessia da ponte.
+    # Um valor bem baixo também funcionaria.
+    answerNoise = 0.0
     return answerDiscount, answerNoise
 
 if __name__ == '__main__':
