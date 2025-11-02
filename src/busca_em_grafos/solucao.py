@@ -1,4 +1,73 @@
-from typing import Self
+import enum
+import typing
+
+
+STATE_TABLE_NUM_POSITIONS = 9
+STATE_TABLE_ROW_LENGTH = 3
+
+
+class Action(enum.StrEnum):
+    UP = "acima"
+    DOWN = "abaixo"
+    RIGHT = "direita"
+    LEFT = "esquerda"
+
+
+class PuzzleState:
+    _N_ROWS: typing.Final[int] = 3
+    _N_COLS: typing.Final[int] = 3
+    _N_POSITIONS: typing.Final[int] = 9
+
+    _BLANK_CHAR: typing.Final[typing.LiteralString] = "_"
+    _SWAP_MARKER: typing.Final[typing.LiteralString] = "X"
+
+    def __init__(self, state: str) -> None:
+        self._state = state
+        self._blank_index = self._get_blank_index()
+
+    def _get_blank_index(self) -> int:
+        return self._state.index(self._BLANK_CHAR)
+
+    def _get_blank_row(self) -> int:
+        return self._blank_index // self._N_ROWS
+
+    def _get_blank_col(self) -> int:
+        return self._blank_index % self._N_COLS
+
+    def can_move_to(self, action: Action) -> bool:
+        if action is Action.UP:
+            return self._get_blank_row() > 0
+
+        if action is Action.DOWN:
+            return self._get_blank_row() < (self._N_ROWS - 1)
+
+        if action is Action.LEFT:
+            return self._get_blank_col() > 0
+
+        if action is Action.RIGHT:
+            return self._get_blank_col() < (self._N_COLS - 1)
+
+        raise NotImplementedError(action)
+
+    def swap(self, action: Action) -> str | None:
+        if not self.can_move_to(action):
+            return None
+
+        if action is Action.UP:
+            target_number = self._state[self._blank_index - self._N_ROWS]
+        elif action is Action.DOWN:
+            target_number = self._state[self._blank_index + self._N_ROWS]
+        elif action is Action.LEFT:
+            target_number = self._state[self._blank_index - 1]
+        elif action is Action.RIGHT:
+            target_number = self._state[self._blank_index + 1]
+        else:
+            raise NotImplementedError(action)
+        return (
+            self._state.replace(target_number, self._SWAP_MARKER)
+            .replace(self._BLANK_CHAR, target_number)
+            .replace(self._SWAP_MARKER, self._BLANK_CHAR)
+        )
 
 
 class Nodo:
@@ -6,7 +75,9 @@ class Nodo:
     Implemente a classe Nodo com os atributos descritos na funcao init
     """
 
-    def __init__(self, estado: str, pai: Self | None, acao: str | None, custo: int):
+    def __init__(
+        self, estado: str, pai: typing.Self | None, acao: str | None, custo: int
+    ):
         """
         Inicializa o nodo com os atributos recebidos
         :param estado:str, representacao do estado do 8-puzzle
@@ -26,8 +97,15 @@ def sucessor(estado: str) -> set[tuple[str, str]]:
     :param estado:
     :return:
     """
-    # substituir a linha abaixo pelo seu codigo
-    raise NotImplementedError
+    puzzle_state = PuzzleState(estado)
+    successors = set()
+
+    for action in Action:
+        next_state = puzzle_state.swap(action)
+        if next_state is None:
+            continue
+        successors.add((action.value, next_state))
+    return successors
 
 
 def expande(nodo: Nodo) -> set[Nodo]:
