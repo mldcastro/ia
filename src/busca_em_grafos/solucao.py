@@ -67,6 +67,8 @@ class PuzzleState:
 
 
 class Nodo:
+    _ACTION_COST: typing.Final[int] = 1
+
     def __init__(
         self, estado: str, pai: typing.Self | None, acao: str | None, custo: int
     ):
@@ -99,6 +101,22 @@ class Nodo:
     @property
     def custo(self) -> int:
         return self._cost
+
+    @property
+    def filhos(self) -> set[typing.Self]:
+        children: set[typing.Self] = set()
+        for action, next_state in sucessor(self._state):
+            children.add(self._make_child(action, next_state, parent=self))
+
+        return children
+
+    @classmethod
+    def _make_child(
+        cls, action: str, state: str, *, parent: typing.Self
+    ) -> typing.Self:
+        return cls(
+            estado=state, acao=action, pai=parent, custo=parent._cost + cls._ACTION_COST
+        )
 
     def __eq__(self, other: typing.Any) -> bool:
         return (
@@ -139,8 +157,7 @@ def expande(nodo: Nodo) -> set[Nodo]:
     :param nodo: objeto da classe Nodo
     :return:
     """
-    # substituir a linha abaixo pelo seu codigo
-    raise NotImplementedError
+    return nodo.filhos
 
 
 def astar_hamming(estado: str) -> list[str]:
