@@ -2,10 +2,6 @@ import enum
 import typing
 
 
-STATE_TABLE_NUM_POSITIONS = 9
-STATE_TABLE_ROW_LENGTH = 3
-
-
 class Action(enum.StrEnum):
     UP = "acima"
     DOWN = "abaixo"
@@ -71,10 +67,6 @@ class PuzzleState:
 
 
 class Nodo:
-    """
-    Implemente a classe Nodo com os atributos descritos na funcao init
-    """
-
     def __init__(
         self, estado: str, pai: typing.Self | None, acao: str | None, custo: int
     ):
@@ -85,8 +77,40 @@ class Nodo:
         :param acao:str, acao a partir do pai que leva a este nodo (None no caso do nó raiz)
         :param custo:int, custo do caminho da raiz até este nó
         """
-        # substitua a linha abaixo pelo seu codigo
-        raise NotImplementedError
+        self._state = estado
+        self._parent = pai
+        self._action = Action(acao) if acao is not None else None
+        self._cost = custo
+
+    @property
+    def estado(self) -> str:
+        return self._state
+
+    @property
+    def pai(self) -> typing.Self | None:
+        return self._parent
+
+    @property
+    def acao(self) -> str | None:
+        if self._action is None:
+            return None
+        return self._action.value
+
+    @property
+    def custo(self) -> int:
+        return self._cost
+
+    def __eq__(self, other: typing.Any) -> bool:
+        return (
+            isinstance(other, Nodo)
+            and (self.estado == other.estado)
+            and (self.pai == other.pai)
+            and (self.acao == other.acao)
+            and (self.custo == other.custo)
+        )
+
+    def __hash__(self) -> int:
+        return hash((self.estado, self.pai, self.acao, self.custo))
 
 
 def sucessor(estado: str) -> set[tuple[str, str]]:
