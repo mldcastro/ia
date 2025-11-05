@@ -278,6 +278,18 @@ def astar(state: str, heuristics: Heuristics) -> list[str] | None:
     return None
 
 
+def hamming_distance(state: str) -> int:
+    assert len(state) == len(PuzzleState.OBJECTIVE_STATE)
+
+    distance = 0
+    for char, target_char in zip(state, PuzzleState.OBJECTIVE_STATE):
+        if char == PuzzleState.BLANK_CHAR:
+            continue
+        if char != target_char:
+            distance += 1
+    return distance
+
+
 def astar_hamming(estado: str) -> list[str] | None:
     """
     Recebe um estado (string), executa a busca A* com h(n) = soma das distâncias de Hamming e
@@ -287,8 +299,7 @@ def astar_hamming(estado: str) -> list[str] | None:
     :param estado: str
     :return:
     """
-    # substituir a linha abaixo pelo seu codigo
-    raise NotImplementedError
+    return astar(estado, heuristics=hamming_distance)
 
 
 def astar_manhattan(estado: str) -> list[str] | None:
