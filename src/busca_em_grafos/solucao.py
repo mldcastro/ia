@@ -290,6 +290,32 @@ def hamming_distance(state: str) -> int:
     return distance
 
 
+def manhattan_distance(state: str) -> int:
+    assert len(state) == len(PuzzleState.OBJECTIVE_STATE)
+
+    index_on_target = {
+        ch: idx
+        for idx, ch in enumerate(PuzzleState.OBJECTIVE_STATE)
+        if ch != PuzzleState.BLANK_CHAR
+    }
+    index_on_state = {
+        ch: idx for idx, ch in enumerate(state) if ch != PuzzleState.BLANK_CHAR
+    }
+
+    distance = 0
+    for char, index in index_on_state.items():
+        target_index = index_on_target[char]
+
+        char_row = index // PuzzleState.N_ROWS
+        char_col = index % PuzzleState.N_COLS
+        target_row = target_index // PuzzleState.N_ROWS
+        target_col = target_index % PuzzleState.N_COLS
+
+        distance += abs(char_row - target_row) + abs(char_col - target_col)
+
+    return distance
+
+
 def astar_hamming(estado: str) -> list[str] | None:
     """
     Recebe um estado (string), executa a busca A* com h(n) = soma das distâncias de Hamming e
@@ -311,8 +337,7 @@ def astar_manhattan(estado: str) -> list[str] | None:
     :param estado: str
     :return:
     """
-    # substituir a linha abaixo pelo seu codigo
-    raise NotImplementedError
+    return astar(estado, heuristics=manhattan_distance)
 
 
 # opcional,extra
