@@ -69,11 +69,11 @@ class PuzzleState:
 
 
 class Nodo:
-    """
-    Implemente a classe Nodo com os atributos descritos na funcao init
-    """
+    _ACTION_COST: typing.Final[int] = 1
 
-    def __init__(self, estado: str, pai: Self | None, acao: str | None, custo: int):
+    def __init__(
+        self, estado: str, pai: typing.Self | None, acao: str | None, custo: int
+    ) -> None:
         """
         Inicializa o nodo com os atributos recebidos
         :param estado:str, representacao do estado do 8-puzzle
@@ -81,8 +81,58 @@ class Nodo:
         :param acao:str, acao a partir do pai que leva a este nodo (None no caso do nó raiz)
         :param custo:int, custo do caminho da raiz até este nó
         """
-        # substitua a linha abaixo pelo seu codigo
-        raise NotImplementedError
+        self._state = estado
+        self._parent = pai
+        self._action = Action(acao) if acao is not None else None
+        self._cost = custo
+
+    @property
+    def estado(self) -> str:
+        return self._state
+
+    @property
+    def is_objective_state(self) -> bool:
+        return self._state == PuzzleState.OBJECTIVE_STATE
+
+    @property
+    def pai(self) -> typing.Self | None:
+        return self._parent
+
+    @property
+    def acao(self) -> str | None:
+        if self._action is None:
+            return None
+        return self._action.value
+
+    @property
+    def custo(self) -> int:
+        return self._cost
+
+    def filhos(self) -> set[typing.Self]:
+        return {
+            self._make_child(action, next_state, parent=self)
+            for action, next_state in sucessor(self._state)
+        }
+
+    @classmethod
+    def _make_child(
+        cls, action: str, state: str, *, parent: typing.Self
+    ) -> typing.Self:
+        return cls(
+            estado=state, acao=action, pai=parent, custo=parent._cost + cls._ACTION_COST
+        )
+
+    def __eq__(self, other: typing.Any) -> bool:
+        return (
+            isinstance(other, Nodo)
+            and (self.estado == other.estado)
+            and (self.pai is other.pai)
+            and (self.acao == other.acao)
+            and (self.custo == other.custo)
+        )
+
+    def __hash__(self) -> int:
+        return hash((self.estado, id(self.pai), self.acao, self.custo))
 
 
 def sucessor(estado: str) -> set[tuple[str, str]]:
