@@ -161,8 +161,7 @@ def expande(nodo: Nodo) -> set[Nodo]:
     :param nodo: objeto da classe Nodo
     :return:
     """
-    # substituir a linha abaixo pelo seu codigo
-    raise NotImplementedError
+    return nodo.filhos()
 
 
 def astar_hamming(estado: str) -> list[str]:
