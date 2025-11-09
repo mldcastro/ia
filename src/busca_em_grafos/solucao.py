@@ -247,7 +247,7 @@ def astar(state: str, heuristics: Heuristics) -> list[str] | None:
     border_map = {root.estado: root}
 
     heapq.heapify(border_heap)
-
+    expanded_nodes = 0
     while len(border_heap) > 0:
         smaller_cost_node = heapq.heappop(border_heap)
         border_map.pop(smaller_cost_node.estado, None)
@@ -256,9 +256,12 @@ def astar(state: str, heuristics: Heuristics) -> list[str] | None:
             continue
 
         if smaller_cost_node.is_objective_state:
+            print(f"{smaller_cost_node=}")
+            print(f"{expanded_nodes=}")
             return smaller_cost_node.collect_all_actions()
 
         seen.add(smaller_cost_node.estado)
+        expanded_nodes += 1
         for child in smaller_cost_node.filhos():
             if child.estado in seen:
                 continue

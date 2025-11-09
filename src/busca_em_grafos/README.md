@@ -8,7 +8,8 @@ Integrantes:
 
 ## Ambiente Python
 
-Esta etapa do trabalho foi executada dentro do seguinte ambiente `miniconda`:
+Esta etapa do trabalho foi executada dentro do seguinte ambiente `miniconda` sem nenhuma
+biblioteca externa:
 
 ```yml
 name: ufrgs-ia
@@ -16,15 +17,20 @@ channels:
   - conda-forge
 dependencies:
   - python=3.12
-  - numpy=2.0
-  - pandas=2.3
-  - matplotlib=3.10
-  - seaborn=0.13
-  - tensorflow=2.18
-  - numba=0.61.2
-  - ipykernel=6.30
-  - jupyterlab=4.4
-  - ruff=0.13.0
 ```
 
 Este ambiente está definido no arquivo `environment.yml`.
+
+## Output para estado inicial "2_3541687"
+
+Distância de Hamming:
+
+- Tempo médio: 106 ms ± 479 μs
+- Custo: 23
+- Nós expandidos: 8854
+
+Distância de Manhattan:
+
+- Tempo médio: 8.39 ms ± 116 μs
+- Custo: 23
+- Nós expandidos: 735
