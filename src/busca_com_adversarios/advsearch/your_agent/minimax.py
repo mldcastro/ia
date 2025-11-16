@@ -6,7 +6,8 @@ def fmax(
         depth: int,
         alpha: float, 
         beta: float, 
-        eval_func: Callable
+        eval_func: Callable,
+        player: str
         ) -> Tuple[float, Optional[Tuple[int, int]]]:
     """
     Max function of the minimax algorithm with alpha-beta pruning.
@@ -15,10 +16,11 @@ def fmax(
     :param alpha: alpha value for pruning
     :param beta: beta value for pruning
     :param eval_func: function to evaluate the game state
+    :param player: player to evaluate the state for
     :return: a tuple containing the maximum value and the corresponding move
     """
     if (depth == 0 or state.is_terminal()):
-        return eval_func(state, "B"), None
+        return eval_func(state, player), None
     
     value: float = -float('inf')
     best_move: Optional[Tuple[int, int]] = None
@@ -29,7 +31,7 @@ def fmax(
 
     for move in state.legal_moves():
         new_state = state.next_state(move)
-        new_value, _ = fmin(new_state, updated_depth, alpha, beta, eval_func)
+        new_value, _ = fmin(new_state, updated_depth, alpha, beta, eval_func, player)
         if new_value > value:
             value = new_value
             best_move = move
@@ -44,7 +46,8 @@ def fmin(
         depth: int,
         alpha: float, 
         beta: float, 
-        eval_func: Callable
+        eval_func: Callable,
+        player: str
         ) -> Tuple[float, Optional[Tuple[int, int]]]:
     """
     Min function of the minimax algorithm with alpha-beta pruning.
@@ -53,10 +56,11 @@ def fmin(
     :param alpha: alpha value for pruning
     :param beta: beta value for pruning
     :param eval_func: function to evaluate the game state
+    :param player: player to evaluate the state for
     :return: a tuple containing the maximum value and the corresponding move
     """
     if (depth == 0 or state.is_terminal()):
-        return eval_func(state, "W"), None
+        return eval_func(state, player), None
     
     value: float = float('inf')
     best_move: Optional[Tuple[int, int]] = None
@@ -67,7 +71,7 @@ def fmin(
 
     for move in state.legal_moves():
         new_state = state.next_state(move)
-        new_value, _ = fmax(new_state, updated_depth, alpha, beta, eval_func)
+        new_value, _ = fmax(new_state, updated_depth, alpha, beta, eval_func, player)
         if new_value < value:
             value = new_value
             best_move = move
@@ -88,5 +92,6 @@ def minimax_move(state, max_depth:int, eval_func:Callable) -> Tuple[int, int]:
     :return: (int, int) tuple with x, y coordinates of the move (remember: 0 is the first row/column)
     """
     move: Optional[Tuple[int, int]] = None
-    _ , move = fmax(state, max_depth, alpha=-float('inf'), beta=float('inf'), eval_func=eval_func)
+    player: str = state.player
+    _ , move = fmax(state, max_depth, -float('inf'), float('inf'), eval_func, player)
     return move
