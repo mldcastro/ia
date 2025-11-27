@@ -6,9 +6,6 @@ from .minimax import minimax_move
 
 # Voce pode criar funcoes auxiliares neste arquivo
 # e tambem modulos auxiliares neste pacote.
-#
-# Nao esqueca de renomear 'your_agent' com o nome
-# do seu agente.
 
 
 _N_POSITIONS = 8 * 8

@@ -6,9 +6,6 @@ from .othello_minimax_custom import make_move as custom_make_move
 
 # Voce pode criar funcoes auxiliares neste arquivo
 # e tambem modulos auxiliares neste pacote.
-#
-# Nao esqueca de renomear 'your_agent' com o nome
-# do seu agente.
 
 
 def make_move(state) -> Tuple[int, int] | None:

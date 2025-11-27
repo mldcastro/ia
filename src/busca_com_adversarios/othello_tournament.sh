@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-base_path="advsearch/your_agent"
+base_path="advsearch/acm_agent"
 
 count_agent="${base_path}/othello_minimax_count.py"
 mask_agent="${base_path}/othello_minimax_mask.py"
